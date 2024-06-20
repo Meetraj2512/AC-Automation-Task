@@ -5,7 +5,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -16,8 +15,6 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.FileInputStream;
-import java.io.InputStream;
-import java.sql.Driver;
 import java.time.Duration;
 import java.util.*;
 
@@ -56,7 +53,7 @@ public class AmazonTask {
     }
 
     @Test(dataProvider = "query_data")
-    private void SearchOperation(String query){
+    public void SearchOperation(String query){
         System.out.println("************************************************************");
         String Base_URI = config.getProperty("Base_URI");
         driver.get(Base_URI);
