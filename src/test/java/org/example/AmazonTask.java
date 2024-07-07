@@ -61,7 +61,7 @@ public class AmazonTask {
     }
 
     private void verifyResults() {
-        Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(config.getProperty("WaitCondtion"))));
 
         List<WebElement> parentElements = driver.findElements(By.xpath(config.getProperty("ParentElement")));
@@ -82,6 +82,7 @@ public class AmazonTask {
         for (Map.Entry<String, String> mp : Products.entrySet()) {
             System.out.println("\nProduct: " + mp.getKey() + "\nPrice: " + mp.getValue());
         }
+        driver.close();
     }
 
     @DataProvider(name = "query_data")
