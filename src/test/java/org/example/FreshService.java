@@ -42,12 +42,13 @@ public class FreshService {
     }
     @Test()
     public void FSAddRequester() throws InterruptedException {
-        System.out.println("************************************************************");
+        System.out.println("*************************start***********************************");
         String Base_URI = "https://armorcode.freshservice.com/";
         driver.get(Base_URI);
         Assert.assertTrue(driver.getTitle().contains("Support"));
         WebElement loginLink = driver.findElement(By.linkText("Login"));
         loginLink.click();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
         WebElement email = driver.findElement(By.id("username"));
         email.sendKeys("meetraj.desai@armorcode.io");
         WebElement pass = driver.findElement(By.id("password"));
@@ -55,13 +56,32 @@ public class FreshService {
         WebElement submit = driver.findElement(By.xpath("//button[@type = \"submit\"]"));
         submit.click();
         Thread.sleep(3000);
-        WebElement kebab = driver.findElement(By.xpath("//a[@title = \"more\"]"));
-        kebab.click();
-        Wait<WebDriver> wait = new WebDriverWait(driver,Duration.ofSeconds(2));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#moreMenu")));
-        WebElement admin = driver.findElement(By.xpath("//a[@title = \"Admin\"]"));
-        admin.click();
-        System.out.println("************************************************************");
+        for (int i=1 ; i<200 ; i++){
+            WebElement kebab = driver.findElement(By.xpath("//a[@title = \"more\"]"));
+            kebab.click();
+            Wait<WebDriver> wait = new WebDriverWait(driver,Duration.ofSeconds(2));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#moreMenu")));
+            WebElement admin = driver.findElement(By.xpath("//a[@title = \"Admin\"]"));
+            admin.click();
+            WebElement req = driver.findElement(By.xpath("//div[@class = \"admin even user \"]//ul//li[5]//a"));
+            req.click();
+            WebElement newreq = driver.findElement(By.linkText("New Requester"));
+            newreq.click();
+            WebElement emailadd = driver.findElement(By.id("user_email"));
+            emailadd.sendKeys(i + "@gmail.com");
+            Thread.sleep(200);
+            WebElement fname = driver.findElement(By.id("user_first_name"));
+            fname.sendKeys(i + "first");
+            Thread.sleep(200);
+            WebElement lname = driver.findElement(By.id("user_last_name"));
+            lname.sendKeys(i + "last");
+            Thread.sleep(200);
+            WebElement save = driver.findElement(By.id("user_submit"));
+            save.click();
+            driver.get("https://armorcode.freshservice.com/a/dashboard/default");
+        }
+        System.out.println("**************************close**********************************");
+        driver.close();
     }
 
 
