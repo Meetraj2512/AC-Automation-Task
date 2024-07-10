@@ -43,7 +43,7 @@ public class AmazonTask {
 
     @BeforeMethod
     public void Setup() {
-        System.setProperty("webdriver.chrome.driver" , "D:\\webdriver\\chromedriver-win64\\chromedriver.exe");
+        WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
     }
